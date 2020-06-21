@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @task = tasks.all
+    @tasks = task.all
   end
 
   def show
