@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    set_task
+    @task = Task.find(params[:id])
   end
 
   def new
@@ -24,11 +24,12 @@ class TasksController < ApplicationController
   end
 
   def edit
-    set_task
+    @task = Task.find(params[:id])
   end
-  
+
   def update
-    set_task
+    @task = Task.find(params[:id])
+
     if @task.update(task_params)
       flash[:success] = 'task は正常に更新されました'
       redirect_to @task
@@ -39,7 +40,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    set_task
+    @task = Task.find(params[:id])
     @task.destroy
 
     flash[:success] = 'task は正常に削除されました'
@@ -47,10 +48,7 @@ class TasksController < ApplicationController
   end
   
   private
-  def set_task
-    @task = Task.find(params[:id])
-  end
   def task_params
-    params.require(:task).permit(:content, :status)
+    params.require(:task).permit(:content )
   end
 end
